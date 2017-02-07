@@ -14,25 +14,17 @@ import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 
+import static com.hzcpoc.Constants.*;
+
 /**
  * Created by Ilya on 29.01.2017.
  */
 public class IncomingMessageStore implements MapStore<Integer, IncomingMessage> {
 
-    public static final String CONFIGURATION_HBASE_ZOOKEEPER_QUORUM                     = "hbase.zookeeper.quorum";
-    public static final String CONFIGURATION_HBASE_ZOOKEEPER_CLIENTPORT                 = "hbase.zookeeper.property.clientPort";
-
-    public static final String HBASE_ZOOKEEPER_QUORUM                     = "192.168.2.55";
-    public static final int HBASE_ZOOKEEPER_CLIENTPORT                    = 2181;
-
-    public static final String TABLE_NAME = "IncomingMessages";
-    public static final String COLUMN_FAMILY = "cfIncomingMessage";
-    public static final String COLUMN_BODY_QUALIFIER = "body";
-    public static final String COLUMN_RECEIVED_QUALIFIER = "received";
-
     private Configuration hConf;
 
     public IncomingMessageStore() {
+        System.out.println("Constructing Store");
         hConf = HBaseConfiguration.create();
 
         hConf.set(CONFIGURATION_HBASE_ZOOKEEPER_QUORUM, HBASE_ZOOKEEPER_QUORUM);
@@ -41,6 +33,7 @@ public class IncomingMessageStore implements MapStore<Integer, IncomingMessage> 
 
     @Override
     public void store(Integer integer, IncomingMessage incomingMessage) {
+        System.out.println("Persisting message " + integer);
         Connection conn = null;
         try {
             conn = ConnectionFactory.createConnection(hConf);

@@ -12,17 +12,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.TimeoutException;
 
+import static com.hzcpoc.Constants.*;
+
 /**
  * Created by Ilya on 01.02.2017.
  */
 public class Producer {
-
-    public static final String RABBITMQ_HOST                     = "192.168.2.54";
-    public static final String RABBITMQ_QUEUE                    = "SI";
-    public static final String RABBIT_USERNAME                   = "admin";
-    public static final String RABBIT_USER_PWD                   = "pwd";
-
-    public static final String FILES_DIRECTORY                   = "C:\\Users\\Kids\\Downloads";
 
     public static void main (String[] args) throws IOException, TimeoutException {
         ConnectionFactory cf = new ConnectionFactory();
